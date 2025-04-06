@@ -1,0 +1,18 @@
+{
+	"id": "pmbadges",
+	"name": "Paper Mario Badges",
+	"display_name": "PM Badges",
+	"author": ["TheSocialZombie"],
+	"description": "Adds a whole new Badge system to Balatro!",
+	"prefix": "pmb",
+	"main_file": "PMBMain.lua",
+	"priority": 0,
+	"badge_colour": "6091EB",
+	"badge_text_colour": "f0f0f0",
+	"version": "1.0.0A",
+	"dependencies": [
+        "Steamodded (>=1.*)",
+        "Lovely (>=0.6)",
+		"Talisman (>=2.*)"
+    ]
+}

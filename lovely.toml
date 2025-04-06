@@ -1,0 +1,191 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# AON functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.debuff then return nil end    local obj = G.P_SEALS[self.seal] or {}"
+position = "at"
+payload = '''
+if self.debuff and not (self.ability.seal and self.ability.seal.extra.seal_disabled) then return nil end    local obj = G.P_SEALS[self.seal] or {}
+'''
+match_indent = true
+
+# Badge add_to_deck and remove_from_deck functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if obj and obj.add_to_deck and type(obj.add_to_deck) == 'function' then
+            obj:add_to_deck(self, from_debuff)
+        end        if self.ability.h_size ~= 0 then
+            G.hand:change_size(self.ability.h_size)
+        end
+'''
+position = "after"
+payload = '''
+local seal = G.P_SEALS[self.seal] or {}
+if seal and seal.add_to_deck and type(seal.add_to_deck) == 'function' then
+            seal:add_to_deck(self, from_debuff)
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if obj and obj.remove_from_deck and type(obj.remove_from_deck) == 'function' then
+            obj:remove_from_deck(self, from_debuff)
+        end        if self.ability.h_size ~= 0 then
+            G.hand:change_size(-self.ability.h_size)
+        end
+'''
+position = "after"
+payload = '''
+local seal = G.P_SEALS[self.seal] or {}
+if seal and seal.remove_from_deck and type(seal.remove_from_deck) == 'function' then
+            seal:remove_from_deck(self, from_debuff)
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+function Card:set_seal(_seal, silent, immediate)
+'''
+position = "after"
+payload = '''
+    if self.seal then
+        local obj = G.P_SEALS[self.seal] or {}
+        if obj and obj.remove_from_deck and type(obj.remove_from_deck) == 'function' then
+                obj:remove_from_deck(self, from_debuff)
+        end
+    end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+for k, v in pairs(G.P_SEALS[_seal].config or {}) do
+            if type(v) == 'table' then
+                self.ability.seal[k] = copy_table(v)
+            else
+                self.ability.seal[k] = v
+            end
+        end
+'''
+position = "after"
+payload = '''
+local obj = G.P_SEALS[self.seal] or {}
+if obj and obj.add_to_deck and type(obj.add_to_deck) == 'function' then
+        obj:add_to_deck(self, from_debuff)
+end
+'''
+match_indent = true
+
+# Badge calc_dollar_bonus functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if obj.calc_dollar_bonus and type(obj.calc_dollar_bonus) == 'function' then
+    return obj:calc_dollar_bonus(self)
+end
+'''
+position = "at"
+payload = '''
+local seal = G.P_SEALS[self.seal] or {}
+if (obj.calc_dollar_bonus and type(obj.calc_dollar_bonus) == 'function') and (seal and seal.calc_dollar_bonus and type(seal.calc_dollar_bonus) == 'function') then
+    return obj:calc_dollar_bonus(self) + seal:calc_dollar_bonus(self)
+elseif obj.calc_dollar_bonus and type(obj.calc_dollar_bonus) == 'function' then
+    return obj:calc_dollar_bonus(self)
+elseif seal and seal.calc_dollar_bonus and type(seal.calc_dollar_bonus) == 'function' then
+    return seal:calc_dollar_bonus(self)
+end
+'''
+match_indent = true
+
+# Head Rattle and Feeling Fine functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.ability.perishable and self.ability.perish_tally <= 0 then 
+    if not self.debuff then
+        self.debuff = true
+        if self.area == G.jokers then self:remove_from_deck(true) end
+    end
+    return
+end
+'''
+position = "after"
+payload = '''
+for i=1, #G.jokers.cards do
+    if G.jokers.cards[i].seal and G.jokers.cards[i].seal == 'pm_feelingfine_seal' and self.ability.set == "Joker" then
+        should_debuff = false
+    end
+end
+for i=1, #G.jokers.cards do
+    if G.jokers.cards[i].seal and G.jokers.cards[i].seal == 'pm_piercingblow_seal' and self.playing_card then
+        should_debuff = false
+    end
+end
+'''
+match_indent = true
+
+# Ice Power functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if not v.ability.eternal then deletable_jokers[#deletable_jokers + 1] = v end
+'''
+position = "at"
+payload = '''
+if not v.ability.eternal and v.seal ~= "pmb_icepower" then deletable_jokers[#deletable_jokers + 1] = v end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if v ~= eligible_card and (not v.ability.eternal) then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end
+'''
+position = "at"
+payload = '''
+if v ~= eligible_card and (not v.ability.eternal and v.seal ~= "pmb_icepower") then v:start_dissolve(nil, _first_dissolve);_first_dissolve = true end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if G.jokers.cards[i] ~= self and not G.jokers.cards[i].ability.eternal and not G.jokers.cards[i].getting_sliced then destructable_jokers[#destructable_jokers+1] = G.jokers.cards[i] end
+'''
+position = "at"
+payload = '''
+if G.jokers.cards[i] ~= self and (not G.jokers.cards[i].ability.eternal and G.jokers.cards[i].seal ~= "pmb_icepower") and not G.jokers.cards[i].getting_sliced then destructable_jokers[#destructable_jokers+1] = G.jokers.cards[i] end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jokers.cards[my_pos+1].ability.eternal and not G.jokers.cards[my_pos+1].getting_sliced then
+'''
+position = "at"
+payload = '''
+if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and (not G.jokers.cards[my_pos+1].ability.eternal and G.jokers.cards[my_pos+1].seal ~= "pmb_icepower") and not G.jokers.cards[my_pos+1].getting_sliced then
+'''
+match_indent = true
