@@ -1,6 +1,8 @@
 -- All or Nothing
 SMODS.Seal{
     key = 'allornothing',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 0},
     config = {extra = {odds = 4, xmult = 2.0, seal_disabled = false}},
@@ -34,6 +36,8 @@ SMODS.Seal{
 -- Bump Attack
 SMODS.Seal{
     key = 'bumpattack',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 5, y = 0},
     config = {extra = {last_score = 0}},
@@ -67,6 +71,8 @@ SMODS.Seal{
 -- Charge
 SMODS.Seal{
     key = 'charge',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 0},
     config = {extra = {activated = false, xmult = 3}},
@@ -105,6 +111,8 @@ SMODS.Seal{
 -- Chill Out
 SMODS.Seal{
     key = 'chillout',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 0},
     config = {extra = {}},
@@ -134,6 +142,8 @@ SMODS.Seal{
 -- Close Call
 SMODS.Seal{
     key = 'closecall',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 8, y = 0},
     config = {extra = {odds = 5}},
@@ -166,6 +176,8 @@ SMODS.Seal{
 -- Damage Dodge
 SMODS.Seal{
     key = 'damagedodge',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 1},
     config = {extra = {odds = 2}},
@@ -188,6 +200,8 @@ SMODS.Seal{
 -- Defense Plus
 SMODS.Seal{
     key = 'defenseplus',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 1},
     config = {extra = {odds = 4}},
@@ -208,6 +222,8 @@ SMODS.Seal{
 -- Double Dip
 SMODS.Seal{
     key = 'doubledip',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 1},
     config = {extra = {odds = 3}},
@@ -235,6 +251,8 @@ SMODS.Seal{
 -- Double Pain
 SMODS.Seal{
     key = 'doublepain',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 3, y = 1},
     config = {extra = {}},
@@ -256,6 +274,8 @@ SMODS.Seal{
 -- Feeling Fine
 SMODS.Seal{
     key = 'feelingfine',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 4, y = 1},
     config = {extra = {}},
@@ -267,8 +287,6 @@ SMODS.Seal{
     calculate = function(self, card, context)
         if context.setting_blind then
             for k, v in ipairs(G.jokers.cards) do
-                if v.ability.perishable then v.ability.perishable = nil end
-                if v.ability.rental then v.ability.rental = nil end
                 if v.ability['pm_monochrome'] then SMODS.Stickers.pm_monochrome:apply(card, nil) end
             end
         end
@@ -278,6 +296,8 @@ SMODS.Seal{
 -- Fire Drive
 SMODS.Seal{
     key = 'firedrive',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 5, y = 1},
     config = {extra = {}},
@@ -308,6 +328,8 @@ SMODS.Seal{
 -- First Attack
 SMODS.Seal{
     key = 'firstattack',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 1},
     config = {extra = {last_score = 0, xmult = 5}},
@@ -341,6 +363,8 @@ SMODS.Seal{
 -- Flower Finder
 SMODS.Seal{
     key = 'flowerfinder',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 1},
     config = {extra = {odds = 5, charged = false}},
@@ -365,6 +389,8 @@ SMODS.Seal{
 -- FP Saver
 SMODS.Seal{
     key = 'flowersaver',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 8, y = 1},
     config = {extra = {odds = 4}},
@@ -385,6 +411,8 @@ SMODS.Seal{
 -- FP Drain
 SMODS.Seal{
     key = 'flowerdrain',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 2},
     config = {extra = {odds = 3}},
@@ -405,6 +433,8 @@ SMODS.Seal{
 -- Flower Plus
 SMODS.Seal{
     key = 'flowerplus',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 2},
     config = {extra = {}},
@@ -432,6 +462,8 @@ SMODS.Seal{
 -- Gold Medal
 SMODS.Seal{
     key = 'goldmedal',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 2},
     config = {extra = {}},
@@ -445,6 +477,8 @@ SMODS.Seal{
 -- Hammer Throw
 SMODS.Seal{
     key = 'hammerthrow',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 3, y = 2},
     config = {extra = {odds = 3}},
@@ -477,6 +511,8 @@ SMODS.Seal{
 -- Happy Flower
 SMODS.Seal{
     key = 'happyflower',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 5, y = 2},
     config = {extra = {hands = 3}},
@@ -502,6 +538,8 @@ SMODS.Seal{
 -- Happy Heart
 SMODS.Seal{
     key = 'happyheart',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 2},
     config = {extra = {discards = 3}},
@@ -527,6 +565,8 @@ SMODS.Seal{
 -- Head Rattle
 SMODS.Seal{
     key = 'headrattle',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 2},
     config = {extra = {odds = 4}},
@@ -548,6 +588,8 @@ SMODS.Seal{
 -- Heart Finder
 SMODS.Seal{
     key = 'heartfinder',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 8, y = 2},
     config = {extra = {odds = 5, charged = false}},
@@ -572,6 +614,8 @@ SMODS.Seal{
 -- HP Drain
 SMODS.Seal{
     key = 'heartdrain',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 3},
     config = {extra = {odds = 4}},
@@ -592,6 +636,8 @@ SMODS.Seal{
 -- HP Plus
 SMODS.Seal{
     key = 'heartplus',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 3},
     config = {extra = {}},
@@ -619,6 +665,8 @@ SMODS.Seal{
 -- Ice Power
 SMODS.Seal{
     key = 'icepower',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 3},
     config = {extra = {}},
@@ -634,6 +682,8 @@ SMODS.Seal{
 -- Ice Smash
 SMODS.Seal{
     key = 'icesmash',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 3, y = 3},
     config = {extra = {odds = 2}},
@@ -664,6 +714,8 @@ SMODS.Seal{
 -- Item Hog
 SMODS.Seal{
     key = 'itemfinder',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 4, y = 3},
     config = {extra = {odds = 5, charged = false}},
@@ -701,6 +753,8 @@ SMODS.Seal{
 -- Last Stand
 SMODS.Seal{
     key = 'laststand',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 3},
     config = {extra = {odds = 2}},
@@ -729,6 +783,8 @@ SMODS.Seal{
 -- Lucky Day
 SMODS.Seal{
     key = 'luckyday',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 8, y = 3},
     config = {extra = {odds = 7}},
@@ -759,6 +815,8 @@ SMODS.Seal{
 -- Lucky Start
 SMODS.Seal{
     key = 'luckystart',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 4},
     config = {extra = {}},
@@ -770,6 +828,7 @@ SMODS.Seal{
     calculate = function(self, card, context)
         if context.first_hand_drawn then
             local other_joker = pseudorandom_element(G.P_SEALS, pseudoseed('lucky'))
+            print(other_joker)
 
             if other_joker and other_joker ~= self and not context.no_blueprint then
                 context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
@@ -790,6 +849,8 @@ SMODS.Seal{
 -- Mega Rush
 SMODS.Seal{
     key = 'megarush',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 4},
     config = {extra = {xmult = 5}},
@@ -819,6 +880,8 @@ SMODS.Seal{
 -- Money Money
 SMODS.Seal{
     key = 'moneyfinder',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 4},
     config = {extra = {money = 2}},
@@ -835,6 +898,8 @@ SMODS.Seal{
 -- Multibounce
 SMODS.Seal{
     key = 'multibounce',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 3, y = 4},
     config = {extra = {odds = 3}},
@@ -867,6 +932,8 @@ SMODS.Seal{
 -- P-Down, D-Up
 SMODS.Seal{
     key = 'pdowndup',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 5, y = 4},
     config = {extra = {xmult = 0.9, xchips = 1.1}},
@@ -886,11 +953,52 @@ SMODS.Seal{
     end
 }
 
--- PEEKABOO TODO
+-- Peekaboo
+SMODS.Seal{
+    key = 'peekaboo',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 6, y = 4},
+    config = {extra = {}},
+    badge_colour = HEX('528e52'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    dependencies = {
+        "PMCS",
+    },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    update = function(self, card, dt)
+        if G.GAME and G.GAME.blind and G.GAME.blind.in_blind and G.GAME.hands and pm_total_chips and type(pm_total_chips) == 'function' then
+            if G.hand and G.hand.highlighted then
+                local text, k, l, scoring_hand, n = G.FUNCS.get_poker_hand_info(G.hand.highlighted)
+                -- first get the score from the 
+                if not string.find(text, "NULL") then
+                    local chip_score = G.GAME.hands[text].chips
+                    local mult_score = G.GAME.hands[text].mult
+                    local total_score = 0
+        
+                    for i=1, #scoring_hand do
+                        local _card = scoring_hand[i]
+                        chip_score = chip_score + pm_total_chips(_card) -- first take into account the chips 
+                    end
+                    chip_score = to_number(chip_score)
+                    mult_score = to_number(mult_score)
+
+                    total_score = chip_score * mult_score
+                    G.GAME.chip_text = number_format(total_score)
+                end
+            end
+        end
+    end,
+}
 
 -- Piercing Blow
 SMODS.Seal{
     key = 'piercingblow',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 4},
     config = {extra = {odds = 5}},
@@ -918,6 +1026,8 @@ SMODS.Seal{
 -- Pity Flower
 SMODS.Seal{
     key = 'pityflower',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 8, y = 4},
     config = {extra = {odds = 2}},
@@ -938,6 +1048,8 @@ SMODS.Seal{
 -- Power Bounce
 SMODS.Seal{
     key = 'powerbounce',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 5},
     config = {extra = {odds = 4}},
@@ -968,6 +1080,8 @@ SMODS.Seal{
 -- Power Jump
 SMODS.Seal{
     key = 'powerjump',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 5},
     config = {extra = {odds = 3}},
@@ -998,6 +1112,8 @@ SMODS.Seal{
 -- Power Plus
 SMODS.Seal{
     key = 'powerplus',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 5},
     config = {extra = {xmult = 1.25}},
@@ -1019,6 +1135,8 @@ SMODS.Seal{
 -- Power Rush
 SMODS.Seal{
     key = 'powerrush',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 3, y = 5},
     config = {extra = {xmult = 2}},
@@ -1048,6 +1166,8 @@ SMODS.Seal{
 -- Power Smash
 SMODS.Seal{
     key = 'powersmash',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 4, y = 5},
     config = {extra = {odds = 9}},
@@ -1078,6 +1198,8 @@ SMODS.Seal{
 -- Pretty Lucky
 SMODS.Seal{
     key = 'prettylucky',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 5, y = 5},
     config = {extra = {odds = 6}},
@@ -1108,6 +1230,8 @@ SMODS.Seal{
 -- P-Up, D-Down
 SMODS.Seal{
     key = 'pupddown',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 5},
     config = {extra = {xmult = 1.1, xchips = 0.9}},
@@ -1130,6 +1254,8 @@ SMODS.Seal{
 -- Refund
 SMODS.Seal{
     key = 'refund',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 6},
     config = {extra = {}},
@@ -1141,9 +1267,9 @@ SMODS.Seal{
     calculate = function(self, card, context)
         if context.using_consumeable and G.GAME.blind.in_blind then
             if context.consumeable then
-                ease_dollars(context.consumable.sell_cost)
+                ease_dollars(context.consumeable.sell_cost)
                 card:juice_up()
-                card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+$"..context.consumable.sell_cost, colour = G.C.MONEY, delay = 0.45})
+                card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+$"..context.consumeable.sell_cost, colour = G.C.MONEY, delay = 0.45})
             end
         end 
     end
@@ -1152,6 +1278,8 @@ SMODS.Seal{
 -- Return Postage
 SMODS.Seal{
     key = 'returnpostage',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 6},
     config = {extra = {chips = 100, mult = 15}},
@@ -1183,6 +1311,8 @@ SMODS.Seal{
 -- Shrink Stomp
 SMODS.Seal{
     key = 'shrinkstomp',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 6},
     config = {extra = {odds = 4}},
@@ -1204,6 +1334,8 @@ SMODS.Seal{
 -- Simplifier
 SMODS.Seal{
     key = 'simplifier',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 3, y = 6},
     config = {extra = {money = -1}},
@@ -1220,6 +1352,8 @@ SMODS.Seal{
 -- Sleep Stomp
 SMODS.Seal{
     key = 'sleepstomp',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 4, y = 6},
     config = {extra = {odds = 4, turns_left = 0, cur_hands = 0}},
@@ -1259,6 +1393,8 @@ SMODS.Seal{
 -- Soft Stomp
 SMODS.Seal{
     key = 'softstomp',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 6},
     config = {extra = {odds = 4, exponent = 1.25}},
@@ -1287,6 +1423,8 @@ SMODS.Seal{
 -- Spike Shield TODO
 SMODS.Seal{
     key = 'spikeshield',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 6},
     config = {extra = {}},
@@ -1303,6 +1441,8 @@ SMODS.Seal{
 -- Super Appeal
 SMODS.Seal{
     key = 'superappeal',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 8, y = 6},
     config = {extra = {money = 3}},
@@ -1325,6 +1465,8 @@ SMODS.Seal{
 -- Timing Tutor
 SMODS.Seal{
     key = 'timingtutor',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 7},
     config = {extra = {highlighted = {}}},
@@ -1338,6 +1480,8 @@ SMODS.Seal{
 -- Tornado Jump
 SMODS.Seal{
     key = 'tornadojump',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 1, y = 7},
     config = {extra = {odds = 5}},
@@ -1368,6 +1512,8 @@ SMODS.Seal{
 -- Unsimplifier
 SMODS.Seal{
     key = 'unsimplifier',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 2, y = 7},
     config = {extra = {money = 1}},
@@ -1386,6 +1532,8 @@ SMODS.Seal{
 -- Zap Tap
 SMODS.Seal{
     key = 'zaptap',
+    badge = true,
+    cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 4, y = 7},
     config = {extra = {xmult = 1.1}},

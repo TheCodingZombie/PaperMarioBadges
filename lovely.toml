@@ -10,7 +10,10 @@ target = "card.lua"
 pattern = "if self.debuff then return nil end    local obj = G.P_SEALS[self.seal] or {}"
 position = "at"
 payload = '''
-if self.debuff and not (self.ability.seal and self.ability.seal.extra.seal_disabled) then return nil end    local obj = G.P_SEALS[self.seal] or {}
+if not (self.ability.seal and self.ability.seal.extra.seal_disabled) then
+    if self.debuff then return nil end 
+end   
+local obj = G.P_SEALS[self.seal] or {}
 '''
 match_indent = true
 
@@ -130,7 +133,7 @@ end
 match_indent = true
 
 
-# Head Rattle and Feeling Fine functionality
+# Piercing Blow and Feeling Fine functionality
 [[patches]]
 [patches.pattern]
 target = "card.lua"
@@ -145,18 +148,36 @@ end
 '''
 position = "after"
 payload = '''
-for i=1, #G.jokers.cards do
-    if G.jokers.cards[i].seal and G.jokers.cards[i].seal == 'pm_feelingfine_seal' and self.ability.set == "Joker" then
-        should_debuff = false
-    end
-end
-for i=1, #G.jokers.cards do
-    if G.jokers.cards[i].seal and G.jokers.cards[i].seal == 'pm_piercingblow_seal' and self.playing_card then
-        should_debuff = false
-    end
-end
+if next(pmb_find_joker_with_seal('pmb_feelingfine')) and self.ability.set == "Joker" then should_debuff = false end
+if next(pmb_find_joker_with_seal('pmb_piercingblow')) and self.playing_card then should_debuff = false end
 '''
 match_indent = true
+
+# Feeling Fine specific functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+if self.config.center.perishable_compat and not self.ability.eternal then
+'''
+position = "at"
+payload = '''
+if self.config.center.perishable_compat and not self.ability.eternal and not next(pmb_find_joker_with_seal('pmb_feelingfine')) then 
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+function Card:set_rental(_rental)
+'''
+position = "after"
+payload = '''
+if next(pmb_find_joker_with_seal('pmb_feelingfine')) then _rental = nil end
+'''
+match_indent = true
+
 
 # Ice Power functionality
 [[patches]]

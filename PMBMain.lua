@@ -2,12 +2,43 @@
 mod_dir = ''..SMODS.current_mod.path
 --pmb_config = SMODS.current_mod.config     not needed right now, but maybe later
 
+-- Talisman --
+to_big = to_big or function(num)
+    return num
+end
+
+-- Return an array of all (non-debuffed) jokers with a certain seal (key)
+-- Debuffed jokers count if `count_debuffed` is true.
+function pmb_find_joker_with_seal(key, count_debuffed)
+    local results = {}
+    if not G.jokers or not G.jokers.cards then return {} end
+    for _, area in ipairs(SMODS.get_card_areas('jokers')) do
+        for _, v in pairs(area.cards) do
+            if v and type(v) == 'table' and v.seal and v.seal == key and (count_debuffed or not v.debuff) then
+                table.insert(results, v)
+            end
+        end
+    end
+    return results
+end
+
 -- ATLASES HERE
-SMODS.Atlas { -- All Other Consumables
+SMODS.Atlas { -- All Badges
 	-- Key for code to find it with
 	key = "PMBadges",
 	-- The name of the file, for the code to pull the atlas from
 	path = "PMBadges.png",
+	-- Width of each sprite in 1x size
+	px = 71,
+	-- Height of each sprite in 1x size
+	py = 95
+}
+
+SMODS.Atlas { -- All Appliers
+	-- Key for code to find it with
+	key = "PMAppliers",
+	-- The name of the file, for the code to pull the atlas from
+	path = "PMAppliers.png",
 	-- Width of each sprite in 1x size
 	px = 71,
 	-- Height of each sprite in 1x size
@@ -38,13 +69,33 @@ SMODS.Gradient{
 	cycle = 3,
 }
 
+SMODS.ConsumableType{
+	key = 'badge_appliers',
+	primary_colour = HEX("a83c32"),
+	secondary_colour =HEX("a83c32"),
+	collection_rows = {6, 6, 6},
+	shop_rate = 0.75,
+	loc_txt = { 
+        name = 'Badge Applier', -- used on card type badges
+        collection = 'Badge Appliers', -- label for the button to access the collection
+    },
+}
 
 -- loads all badge files for use later
--- might change depending on the needs of this mod as well as potential future ideas
--- like making this more like an API 
-local path = SMODS.current_mod.path..'src/'
-for _,v in pairs(NFS.getDirectoryItems(path)) do
-    assert(SMODS.load_file('src/'..v))()
+local loaded = assert(SMODS.load_file('src/PMBadges.lua'))()
+if not loaded then
+	-- automagically making consumables that apply badges
+	local consumable, load_error = assert(SMODS.load_file("src/PMBTarots.lua"))
+	if load_error then
+		sendDebugMessage ("The error is: "..load_error)
+	else
+		local curr_consumable = consumable()
+		if curr_consumable.init then curr_consumable:init() end
+		for i, item in ipairs(curr_consumable.list) do
+			item.discovered = true
+			SMODS.Consumable(item)
+		end
+	end
 end
 
 -- make retriggers exist

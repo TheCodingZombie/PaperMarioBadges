@@ -6,7 +6,7 @@
 	"description": "Adds a whole new Badge system to Balatro!",
 	"prefix": "pmb",
 	"main_file": "PMBMain.lua",
-	"priority": 0,
+	"priority": 1,
 	"badge_colour": "6091EB",
 	"badge_text_colour": "f0f0f0",
 	"version": "1.0.0A",

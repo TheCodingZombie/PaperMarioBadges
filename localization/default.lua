@@ -285,6 +285,15 @@ return {
                 }
             },
 
+            pmb_peekaboo_seal = {
+                name = "Peekaboo",
+                text = {
+                    "Predicts the score of the",
+                    "{C:attention}selected hand",
+                    "{C:inactive,s:0.9}(Does not count scoring Jokers... YET){}",
+                }
+            },
+
             pmb_piercingblow_seal = {
                 name = "Piercing Blow",
                 text = {
@@ -472,6 +481,9 @@ return {
         Tag={},
         Tarot={},
         Voucher={},
+        pmb_badge_appliers = {
+            
+        },
     },
     misc = {
         achievement_descriptions={},
@@ -539,6 +551,7 @@ return {
             pmb_moneyfinder_seal = "Money Money",
             pmb_multibounce_seal = "Multibounce",
             pmb_pdowndup_seal = "P-Down D-Up",
+            pmb_peekaboo_seal = "Peekaboo",
             pmb_piercingblow_seal = "Piercing Blow",
             pmb_pityflower_seal = "Pity Flower",
             pmb_powerbounce_seal = "Power Bounce",
