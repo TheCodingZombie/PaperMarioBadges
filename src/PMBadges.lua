@@ -834,7 +834,7 @@ SMODS.Seal{
 
 -- Multibounce
 SMODS.Seal{
-    key = 'hammerthrow',
+    key = 'multibounce',
     atlas = 'PMBadges',
     pos = {x = 3, y = 4},
     config = {extra = {odds = 3}},
@@ -1129,7 +1129,7 @@ SMODS.Seal{
 
 -- Refund
 SMODS.Seal{
-    key = 'doubledip',
+    key = 'refund',
     atlas = 'PMBadges',
     pos = {x = 0, y = 6},
     config = {extra = {}},
@@ -1322,7 +1322,18 @@ SMODS.Seal{
     end
 }
 
--- TIMING TUTOR TODO
+-- Timing Tutor
+SMODS.Seal{
+    key = 'timingtutor',
+    atlas = 'PMBadges',
+    pos = {x = 0, y = 7},
+    config = {extra = {highlighted = {}}},
+    badge_colour = HEX('ff6d00'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+}
 
 -- Tornado Jump
 SMODS.Seal{
@@ -1374,7 +1385,7 @@ SMODS.Seal{
 
 -- Zap Tap
 SMODS.Seal{
-    key = 'returnpostage',
+    key = 'zaptap',
     atlas = 'PMBadges',
     pos = {x = 4, y = 7},
     config = {extra = {xmult = 1.1}},

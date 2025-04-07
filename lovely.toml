@@ -113,6 +113,23 @@ end
 '''
 match_indent = true
 
+# Badge load functionality (for like one badge lmao)
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.seal = cardTable.seal
+'''
+position = "after"
+payload = '''
+local seal = G.P_SEALS[self.seal] or {}
+if seal and seal.load and type(seal.load) == 'function' then 
+    seal:load(self, cardTable, other_card)
+end
+'''
+match_indent = true
+
+
 # Head Rattle and Feeling Fine functionality
 [[patches]]
 [patches.pattern]

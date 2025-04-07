@@ -433,6 +433,14 @@ return {
                 }
             },
 
+            pmb_timingtutor_seal = {
+                name = "Timing Tutor",
+                text = {
+                    "{C:attention}Highlights{} the best hand playable",
+                    "{C:inactive,s:0.9}(Goes in poker hand order)",
+                }
+            },
+
             pmb_tornadojump_seal = {
                 name = "Tornado Jump",
                 text = {
@@ -549,6 +557,7 @@ return {
             pmb_softstomp_seal = "Soft Stomp",
             pmb_spikeshield_seal = "Spike Shield",
             pmb_superappeal_seal = "Super Appeal",
+            pmb_timingtutor_seal = "Timing Tutor",
             pmb_tornadojump_seal = "Tornado Jump",
             pmb_unsimplifier_seal = "Unsimplifier",
             pmb_zaptap_seal = "Zap Tap",
