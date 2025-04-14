@@ -37,6 +37,7 @@ SMODS.Seal{
 SMODS.Seal{
     key = 'bumpattack',
     badge = true,
+    unique = true,
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 5, y = 0},
@@ -329,6 +330,7 @@ SMODS.Seal{
 SMODS.Seal{
     key = 'firstattack',
     badge = true,
+    unique = true,
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 1},
@@ -957,6 +959,7 @@ SMODS.Seal{
 SMODS.Seal{
     key = 'peekaboo',
     badge = true,
+    unique = true,
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 6, y = 4},
@@ -1466,6 +1469,7 @@ SMODS.Seal{
 SMODS.Seal{
     key = 'timingtutor',
     badge = true,
+    unique = true,
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 7},

@@ -36,6 +36,8 @@ for i,n in ipairs(a) do
             can_use = function(self, card)
                 if not G.jokers.highlighted or #G.jokers.highlighted ~= 1 then
                     return G.jokers and G.jokers.cards and #G.jokers.cards > 1 and G.jokers.cards[1]
+                elseif card.ability.generated.unique and next(pmb_find_joker_with_seal(card.ability.generated)) then
+                    return false
                 else
                     return true
                 end
@@ -52,7 +54,8 @@ for i,n in ipairs(a) do
                 end
             end,
             in_pool = (v.in_pool and type(v.in_pool) == 'function') or function(self, args)
-                return true
+                if self.config.generated.unique and next(pmb_find_joker_with_seal(self.config.generated)) then return false
+                else return true end
             end
         }
         appliers[#appliers+1] = item
