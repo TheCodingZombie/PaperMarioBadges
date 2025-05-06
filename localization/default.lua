@@ -156,6 +156,14 @@ return {
                 }
             },
 
+            pmb_hammerman_seal = {
+                name = "Hammerman",
+                text = {
+                    "All {C:attention}Hammer{} cards cost {C:money}$1{} less,",
+                    "but all {C:attention}Jump{} cards are debuffed",
+                }
+            },
+
             pmb_happyflower_seal = {
                 name = "Happy Flower",
                 text = {
@@ -226,6 +234,14 @@ return {
                 }
             },
 
+            pmb_jumpman_seal = {
+                name = "Jumpman",
+                text = {
+                    "All {C:attention}Jump{} cards cost {C:money}$1{} less,",
+                    "but all {C:attention}Hammer{} cards are debuffed",
+                }
+            },
+
             pmb_laststand_seal = {
                 name = "Last Stand",
                 text = {
@@ -246,9 +262,10 @@ return {
             pmb_luckystart_seal = {
                 name = "Lucky Start",
                 text = {
-                    "This's badge's ability becomes",
-                    "a {C:green}random{} badge's ability",
+                    "This's Badge's ability becomes",
+                    "a {C:green}random{} Badge's ability",
                     "at the start of a round",
+                    "{C:inactive}(Chooses from your other non-Lucky Start Badges){}",
                 }
             },
 
@@ -430,7 +447,8 @@ return {
             pmb_spikeshield_seal = {
                 name = "Spike Shield",
                 text = {
-                    "Flushes cannot be debuffed",
+                    "{C:blue}Hands{} are not lost when playing",
+                    "a hand containing a {C:red}debuffed{} card",
                 }
             },
 
@@ -506,6 +524,8 @@ return {
             pmb_nice = "NICE!",
             pmb_lucky = "LUCKY!",
             pmb_appeal = "STYLISH!",
+            pmb_blocked = "GUARD!",
+            pmb_blocked_ex = "SUPERGUARD!",
 
             pmb_exponential = "^1,25",
             pmb_plus_battlecard = "+1 Battle Card",
@@ -535,6 +555,7 @@ return {
             pmb_flowerplus_seal = "FP Plus",
             pmb_goldmedal_seal = "Gold Medal",
             pmb_hammerthrow_seal = "Hammer Throw",
+            pmb_hammerman_seal = "Hammerman",
             pmb_happyflower_seal = "Happy Flower",
             pmb_happyheart_seal = "Happy Heart",
             pmb_headrattle_seal = "Head Rattle",
@@ -544,6 +565,7 @@ return {
             pmb_icepower_seal = "Ice Power",
             pmb_icesmash_seal = "Ice Smash",
             pmb_itemfinder_seal = "Item Hog",
+            pmb_jumpman_seal = "Jumpman",
             pmb_laststand_seal = "Last Stand",
             pmb_luckyday_seal = "Lucky Day",
             pmb_luckystart_seal = "Lucky Start",

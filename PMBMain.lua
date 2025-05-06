@@ -114,11 +114,29 @@ SMODS.DrawStep {
     },
     func = function (card, layer)
         if layer == 'card' or layer == 'both' then
-            if card.seal and card.seal == 'pmb_goldmedal' and (card.config.center.discovered or card.bypass_discovery_center) then
+            if ((card.seal and card.seal == 'pmb_goldmedal') or (card.ability and card.ability.seal and card.ability.seal.extra and type(card.ability.seal.extra) == "table" and card.ability.seal.extra.other_joker and card.ability.seal.extra.other_joker.seal and card.ability.seal.extra.other_joker.seal == 'pmb_goldmedal')) and (card.config.center.discovered or card.bypass_discovery_center) then
                 card.children.center:draw_shader('pmb_gold', nil, card.ARGS.send_to_shader)
                 if card.children.front and (card.ability.delayed or (card.ability.effect ~= 'Stone Card' and not card.config.center.replace_base_card)) then
                     card.children.front:draw_shader('pmb_gold', nil, card.ARGS.send_to_shader)
                 end
+            end
+        end
+    end,
+}
+
+-- draw the badge that lucky start is copying
+SMODS.DrawStep {
+    key = 'lucky_step',
+    order = 66,
+    conditions = {
+        facing = 'front',
+    },
+    func = function (card, layer)
+        if layer == 'card' or layer == 'both' then
+            if card.seal and card.seal == 'pmb_luckystart' and card.ability and card.ability.seal and card.ability.seal.extra and type(card.ability.seal.extra) == "table" and card.ability.seal.extra.other_joker and card.ability.seal.extra.other_joker.seal and (card.config.center.discovered or card.bypass_discovery_center) then
+                card.children.lucky_step = Sprite(card.T.x, card.T.y, card.T.w, card.T.h, G.ASSET_ATLAS["pmb_PMBadges"], card.ability.seal.extra.other_joker.ability.seal.pos)
+            else
+                card.children.lucky_step = nil
             end
         end
     end,

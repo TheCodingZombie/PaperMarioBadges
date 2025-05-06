@@ -190,9 +190,12 @@ SMODS.Seal{
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
            if string.find(context.scoring_name, "High Card") and pseudorandom('dd') < (G.GAME.probabilities.normal / card.ability.seal.extra.odds) then
-            ease_hands_played(1)
-            card:juice_up()
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize("pmb_nice"), colour = G.C.BLUE, delay = 0.45})
+                ease_hands_played(1)
+                return {
+                    message = localize("pmb_nice"),
+                    colour = G.C.BLUE,
+                    card = card
+                }
            end
         end
     end
@@ -214,7 +217,12 @@ SMODS.Seal{
     calculate = function(self, card, context)
         if context.before and not context.blueprint then
            if pseudorandom('dp') < (G.GAME.probabilities.normal / card.ability.seal.extra.odds) then
-            ease_hands_played(1)
+                ease_hands_played(1)
+                return {
+                    message = localize("pmb_blocked"),
+                    colour = G.C.BLUE,
+                    card = card
+                }
            end
         end
     end
@@ -508,7 +516,57 @@ SMODS.Seal{
     end
 }
 
--- HAMMERMAN TODO
+-- Hammerman
+SMODS.Seal{
+    key = 'hammerman',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 4, y = 2},
+    config = {extra = {}},
+    badge_colour = HEX('ff4500'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    dependencies = {
+        "PMCS",
+    },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.hand_drawn or context.card_added or context.buying_card then
+            for i=1, #G.consumeables.cards do
+                local c = G.consumeables.cards[i]
+                if c.ability and c.ability.extra and c.ability.extra.jump then c:set_debuff(true) end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if G.shop_jokers then
+            for i=1, #G.shop_jokers do
+                local c = G.shop_jokers[i]
+                c:set_cost()
+            end
+        end
+        
+        for i=1, #G.consumeables.cards do
+            local c = G.consumeables.cards[i]
+            if c.ability and c.ability.extra and c.ability.extra.jump then c:set_debuff(true) end
+        end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if G.shop_jokers then
+            for i=1, #G.shop_jokers do
+                local c = G.shop_jokers[i]
+                c:set_cost()
+            end
+        end
+        
+        for i=1, #G.consumeables.cards do
+            local c = G.consumeables.cards[i]
+            if c.ability and c.ability.extra and c.ability.extra.jump and not next(pmb_find_joker_with_seal('pmb_hammerman')) then c:set_debuff(nil) end
+        end
+    end,
+}
 
 -- Happy Flower
 SMODS.Seal{
@@ -748,7 +806,57 @@ SMODS.Seal{
     end
 }
 
--- JUMPMAN TODO
+-- Jumpman
+SMODS.Seal{
+    key = 'jumpman',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 5, y = 3},
+    config = {extra = {}},
+    badge_colour = HEX('ff4500'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    dependencies = {
+        "PMCS",
+    },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.hand_drawn or context.card_added or context.buying_card then
+            for i=1, #G.consumeables.cards do
+                local c = G.consumeables.cards[i]
+                if c.ability and c.ability.extra and c.ability.extra.hammer then c:set_debuff(true) end
+            end
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if G.shop_jokers then
+            for i=1, #G.shop_jokers do
+                local c = G.shop_jokers[i]
+                c:set_cost()
+            end
+        end
+        
+        for i=1, #G.consumeables.cards do
+            local c = G.consumeables.cards[i]
+            if c.ability and c.ability.extra and c.ability.extra.hammer then c:set_debuff(true) end
+        end
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        if G.shop_jokers then
+            for i=1, #G.shop_jokers do
+                local c = G.shop_jokers[i]
+                c:set_cost()
+            end
+        end
+        
+        for i=1, #G.consumeables.cards do
+            local c = G.consumeables.cards[i]
+            if c.ability and c.ability.extra and c.ability.extra.hammer and not next(pmb_find_joker_with_seal('pmb_jumpman')) then c:set_debuff(nil) end
+        end
+    end,
+}
 
 -- L EMBLEM TODO
 
@@ -821,28 +929,34 @@ SMODS.Seal{
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 0, y = 4},
-    config = {extra = {}},
+    config = {extra = {other_joker = nil}},
     badge_colour = HEX('9c1c19'),
     sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
     loc_vars = function(self, info_queue, card)
+        if card.ability.seal.extra.other_joker and card.ability.seal.extra.other_joker.seal then info_queue[#info_queue+1] = G.P_SEALS[card.ability.seal.extra.other_joker.seal] end
         return { vars = {} }
     end,
     calculate = function(self, card, context)
         if context.first_hand_drawn then
-            local other_joker = pseudorandom_element(G.P_SEALS, pseudoseed('lucky'))
-            print(other_joker)
+            local eligible_jokers = {}
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i].seal ~= 'pmb_luckystart' and G.jokers.cards[i].seal and G.jokers.cards[i].ability and G.jokers.cards[i].ability.seal and G.jokers.cards[i].ability.seal.badge and not G.jokers.cards[i].ability.seal.unique then eligible_jokers[#eligible_jokers+1] = G.jokers.cards[i] end
+            end
 
-            if other_joker and other_joker ~= self and not context.no_blueprint then
-                context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
-                context.blueprint_card = context.blueprint_card or self
-                local other_joker_ret = other_joker:calculate_seal(context)
-                context.blueprint = nil
-                context.blueprint_card = nil
-                if other_joker_ret then 
-                    other_joker_ret.card = card
-                    other_joker_ret.colour = G.C.BLUE
-                    return other_joker_ret
-                end
+            card.ability.seal.extra.other_joker = pseudorandom_element(eligible_jokers, pseudoseed("lucky"))
+            local other_joker = card.ability.seal.extra.other_joker
+        end
+
+        if other_joker and other_joker ~= card and other_joker.calculate and type(other_joker.calculate) == "function" and not context.no_blueprint then
+            context.blueprint = (context.blueprint and (context.blueprint + 1)) or 1
+            context.blueprint_card = context.blueprint_card or card
+            local other_joker_ret = other_joker:calculate_seal(context)
+            context.blueprint = nil
+            context.blueprint_card = nil
+            if other_joker_ret then 
+                other_joker_ret.card = card
+                other_joker_ret.colour = G.C.RED
+                return other_joker_ret
             end
         end
     end
@@ -990,7 +1104,8 @@ SMODS.Seal{
                     mult_score = to_number(mult_score)
 
                     total_score = chip_score * mult_score
-                    G.GAME.chip_text = number_format(total_score)
+                    G.GAME.chip_text = number_format(to_big(total_score))
+                    
                 end
             end
         end
@@ -1023,6 +1138,7 @@ SMODS.Seal{
                 card_eval_status_text(_card, 'extra', nil, nil, nil, {message = localize('pmb_plus_battlecard'), colour = G.C.PURPLE})
             end
         end
+        
     end
 }
 
@@ -1356,6 +1472,7 @@ SMODS.Seal{
 SMODS.Seal{
     key = 'sleepstomp',
     badge = true,
+    unique = true,
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 4, y = 6},
@@ -1391,7 +1508,37 @@ SMODS.Seal{
     end
 }
 
--- SLOW GO TODO
+-- Slow Go
+SMODS.Seal{
+    key = 'slowgo',
+    badge = true,
+    unique = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 5, y = 6},
+    config = {extra = 0},
+    badge_colour = HEX('5ab66b'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.selling_self then
+            G.SETTINGS.GAMESPEED = math.max(card.ability.seal.extra, G.SETTINGS.GAMESPEED * 2)
+        end
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        if G.STAGE == G.STAGES.RUN and card.area == G.jokers then
+            card.ability.seal.extra = G.SETTINGS.GAMESPEED
+            G.SETTINGS.GAMESPEED = G.SETTINGS.GAMESPEED * 0.5
+        end
+	end,
+	remove_from_deck = function(self, card, from_debuff)
+        if G.STAGE == G.STAGES.RUN and card.area == G.jokers then
+            G.SETTINGS.GAMESPEED = math.max(card.ability.seal.extra, G.SETTINGS.GAMESPEED * 2)
+        end
+	end
+}
 
 -- Soft Stomp
 SMODS.Seal{
@@ -1423,10 +1570,11 @@ SMODS.Seal{
     end
 }
 
--- Spike Shield TODO
+-- Spike Shield
 SMODS.Seal{
     key = 'spikeshield',
     badge = true,
+    unique = true,
     cns_atlas = 'PMAppliers',
     atlas = 'PMBadges',
     pos = {x = 7, y = 6},
@@ -1437,7 +1585,21 @@ SMODS.Seal{
         return { vars = {} }
     end,
     calculate = function(self, card, context)
-        
+        if context.before and not context.blueprint then
+            local active = false
+            for i=1, #G.play.cards do
+                if G.play.cards[i].debuff then active = true; break end
+            end
+
+            if active then 
+                ease_hands_played(1)
+                return {
+                    message = localize("pmb_blocked"),
+                    colour = G.C.BLUE,
+                    card = card
+                }
+            end
+        end
     end
 }
 

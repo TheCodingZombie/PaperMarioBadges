@@ -5,9 +5,6 @@ local seals = SMODS.Seals
 a = {}
 for n in pairs(seals) do table.insert(a, n) end
 table.sort(a)
-for i,n in ipairs(a) do print("n: "); print(n) end
--- i is the index, a is the table, n is the key
-
 
 for i,n in ipairs(a) do
     local k = n

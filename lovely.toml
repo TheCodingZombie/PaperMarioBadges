@@ -1,19 +1,39 @@
 [manifest]
 version = "1.0.0"
 dump_lua = true
-priority = -1
+priority = -9
+
+# easier badge searching functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.ability.seal = {}
+'''
+position = "after"
+payload = '''
+if G.P_SEALS[_seal].badge then self.ability.seal.badge = G.P_SEALS[_seal].badge
+else self.ability.seal.badge = nil end
+if G.P_SEALS[_seal].pos then self.ability.seal.pos = G.P_SEALS[_seal].pos
+else self.ability.seal.pos = nil end
+if G.P_SEALS[_seal].unique then self.ability.seal.unique = G.P_SEALS[_seal].unique
+else self.ability.seal.unique = nil end
+'''
+match_indent = true
 
 # AON functionality
 [[patches]]
 [patches.pattern]
 target = "card.lua"
-pattern = "if self.debuff then return nil end    local obj = G.P_SEALS[self.seal] or {}"
+pattern = '''
+function Card:calculate_seal(context)
+    if not self:can_calculate() then return {} end
+'''
 position = "at"
 payload = '''
 if not (self.ability.seal and self.ability.seal.extra.seal_disabled) then
-    if self.debuff then return nil end 
+    if not self:can_calculate() then return {} end
 end   
-local obj = G.P_SEALS[self.seal] or {}
 '''
 match_indent = true
 
@@ -225,5 +245,19 @@ if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and not G.jok
 position = "at"
 payload = '''
 if my_pos and G.jokers.cards[my_pos+1] and not self.getting_sliced and (not G.jokers.cards[my_pos+1].ability.eternal and G.jokers.cards[my_pos+1].seal ~= "pmb_icepower") and not G.jokers.cards[my_pos+1].getting_sliced then
+'''
+match_indent = true
+
+# Hammerman and Jumpman functionality
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = '''
+self.cost = math.max(1, math.floor((self.base_cost + self.extra_cost + 0.5)*(100-G.GAME.discount_percent)/100))
+'''
+position = "after"
+payload = '''
+if (next(pmb_find_joker_with_seal('pmb_hammerman')) and (self.ability and self.ability.extra and type(self.ability.extra) == "table" and self.ability.extra.hammer)) then self.cost = self.cost - (next(pmb_find_joker_with_seal('pmb_hammerman'))); self.cost = math.max(0, self.cost) end
+if (next(pmb_find_joker_with_seal('pmb_jumpman')) and (self.ability and self.ability.extra and type(self.ability.extra) == "table" and self.ability.extra.jump)) then self.cost = self.cost - (next(pmb_find_joker_with_seal('pmb_jumpman'))); self.cost = math.max(0, self.cost) end
 '''
 match_indent = true
