@@ -15,7 +15,7 @@ for i,n in ipairs(a) do
             set = "badge_appliers",
             atlas = v.cns_atlas or v.atlas,
             pos = v.cns_pos or v.pos,
-            cost = 3,
+            cost = v.cost or 3,
             loc_txt = {
                 ['default'] = {
                     name = "Badge Applier",
