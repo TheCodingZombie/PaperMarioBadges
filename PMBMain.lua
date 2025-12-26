@@ -83,6 +83,15 @@ SMODS.ConsumableType{
 
 -- loads all badge files for use later
 local loaded = assert(SMODS.load_file('src/PMBadges.lua'))()
+-- Then load everything in the custom folder
+local files = NFS.getDirectoryItemsInfo(mod_dir .. "/custom/")
+for i = 1, #files do
+	local file_name = files[i].name
+	if file_name:sub(-4) == ".lua" then
+		assert(SMODS.load_file("custom/" .. file_name))()
+	end
+end
+
 if not loaded then
 	-- automagically making consumables that apply badges
 	local consumable, load_error = assert(SMODS.load_file("src/PMBTarots.lua"))
