@@ -14,6 +14,46 @@ return {
                 }
             },
 
+            pmb_attackfxb_seal = {
+                name = "Attack FX B",
+                text = {
+                    "Plays a sound when this",
+                    "Joker is triggered."
+                }
+            },
+
+            pmb_attackfxg_seal = {
+                name = "Attack FX G",
+                text = {
+                    "Plays a sound when this",
+                    "Joker is triggered."
+                }
+            },
+
+            pmb_attackfxp_seal = {
+                name = "Attack FX P",
+                text = {
+                    "Plays a sound when this",
+                    "Joker is triggered."
+                }
+            },
+
+            pmb_attackfxr_seal = {
+                name = "Attack FX R",
+                text = {
+                    "Plays a sound when this",
+                    "Joker is triggered."
+                }
+            },
+
+            pmb_attackfxy_seal = {
+                name = "Attack FX Y",
+                text = {
+                    "Plays a sound when this",
+                    "Joker is triggered."
+                }
+            },
+
             pmb_bumpattack_seal = {
                 name = "Bump Attack",
                 text = {
@@ -241,6 +281,13 @@ return {
                     "but all {C:attention}Hammer{} cards are debuffed",
                 }
             },
+            
+            pmb_lemblem_seal = {
+                name = "L Emblem",
+                text = {
+                    "Does... nothing?"
+                }
+            },
 
             pmb_laststand_seal = {
                 name = "Last Stand",
@@ -291,6 +338,13 @@ return {
                 text = {
                     "{C:green}#1# in #2#{} chance to gain a",
                     "{C:attention}Line Jump{} at the start of the round",
+                }
+            },
+
+            pmb_nostalgictunes_seal = {
+                name = "Nostalgic Tunes",
+                text = {
+                    "Plays cool retro music."
                 }
             },
             
@@ -486,6 +540,13 @@ return {
                 }
             },
 
+            pmb_wemblem_seal = {
+                name = "W Emblem",
+                text = {
+                    "Does... nothing?"
+                }
+            },
+
             pmb_zaptap_seal = {
                 name = "Zap Tap",
                 text = {
@@ -538,6 +599,11 @@ return {
         high_scores={},
         labels={
             pmb_allornothing_seal = "All or Nothing",
+            pmb_attackfxb_seal = "Attack FX B",
+            pmb_attackfxg_seal = "Attack FX G",
+            pmb_attackfxp_seal = "Attack FX P",
+            pmb_attackfxr_seal = "Attack FX R",
+            pmb_attackfxy_seal = "Attack FX Y",
             pmb_bumpattack_seal = "Bump Attack",
             pmb_charge_seal = "Charge",
             pmb_chillout_seal = "Chill Out",
@@ -566,12 +632,14 @@ return {
             pmb_icesmash_seal = "Ice Smash",
             pmb_itemfinder_seal = "Item Hog",
             pmb_jumpman_seal = "Jumpman",
+            pmb_lemblem_seal = "L Emblem",
             pmb_laststand_seal = "Last Stand",
             pmb_luckyday_seal = "Lucky Day",
             pmb_luckystart_seal = "Lucky Start",
             pmb_megarush_seal = "Mega Rush",
             pmb_moneyfinder_seal = "Money Money",
             pmb_multibounce_seal = "Multibounce",
+            pmb_nostalgictunes_seal = "Nostalgic Tunes",
             pmb_pdowndup_seal = "P-Down D-Up",
             pmb_peekaboo_seal = "Peekaboo",
             pmb_piercingblow_seal = "Piercing Blow",
@@ -595,6 +663,7 @@ return {
             pmb_timingtutor_seal = "Timing Tutor",
             pmb_tornadojump_seal = "Tornado Jump",
             pmb_unsimplifier_seal = "Unsimplifier",
+            pmb_wemblem_seal = "W Emblem",
             pmb_zaptap_seal = "Zap Tap",
         },
         poker_hand_descriptions={},

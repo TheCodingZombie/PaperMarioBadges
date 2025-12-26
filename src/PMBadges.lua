@@ -31,7 +31,106 @@ SMODS.Seal{
     end
 }
 
--- ATTACK FXS HERE
+-- Atack FX B
+SMODS.Seal{
+    key = 'attackfxb',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 1, y = 0},
+    config = {extra = {}},
+    badge_colour = HEX('0009b5'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            play_sound('negative')
+        end
+    end
+}
+
+-- Atack FX G
+SMODS.Seal{
+    key = 'attackfxg',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 2, y = 0},
+    config = {extra = {}},
+    badge_colour = HEX('00b50f'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            play_sound('whoosh1')
+        end
+    end
+}
+
+-- Atack FX P
+SMODS.Seal{
+    key = 'attackfxp',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 3, y = 0},
+    config = {extra = {}},
+    badge_colour = HEX('b5009d'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            play_sound('crumple5')
+        end
+    end
+}
+
+-- Atack FX R
+SMODS.Seal{
+    key = 'attackfxr',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 5, y = 7},
+    config = {extra = {}},
+    badge_colour = HEX('b50000'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            play_sound('multihit2')
+        end
+    end
+}
+
+-- Atack FX Y
+SMODS.Seal{
+    key = 'attackfxy',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 4, y = 0},
+    config = {extra = {}},
+    badge_colour = HEX('b5a900'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main then
+            play_sound('gong')
+        end
+    end
+}
+
 
 -- Bump Attack
 SMODS.Seal{
@@ -547,10 +646,11 @@ SMODS.Seal{
                 c:set_cost()
             end
         end
-        
-        for i=1, #G.consumeables.cards do
-            local c = G.consumeables.cards[i]
-            if c.ability and c.ability.extra and c.ability.extra.jump then c:set_debuff(true) end
+        if G.consumeables then
+            for i=1, #G.consumeables.cards do
+                local c = G.consumeables.cards[i]
+                if c.ability and c.ability.extra and c.ability.extra.jump then c:set_debuff(true) end
+            end
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
@@ -560,10 +660,11 @@ SMODS.Seal{
                 c:set_cost()
             end
         end
-        
-        for i=1, #G.consumeables.cards do
-            local c = G.consumeables.cards[i]
-            if c.ability and c.ability.extra and c.ability.extra.jump and not next(pmb_find_joker_with_seal('pmb_hammerman')) then c:set_debuff(nil) end
+        if G.consumeables then
+            for i=1, #G.consumeables.cards do
+                local c = G.consumeables.cards[i]
+                if c.ability and c.ability.extra and c.ability.extra.jump and not next(pmb_find_joker_with_seal('pmb_hammerman')) then c:set_debuff(nil) end
+            end
         end
     end,
 }
@@ -824,9 +925,11 @@ SMODS.Seal{
     end,
     calculate = function(self, card, context)
         if context.hand_drawn or context.card_added or context.buying_card then
-            for i=1, #G.consumeables.cards do
-                local c = G.consumeables.cards[i]
-                if c.ability and c.ability.extra and c.ability.extra.hammer then c:set_debuff(true) end
+            if G.consumeables then
+                for i=1, #G.consumeables.cards do
+                    local c = G.consumeables.cards[i]
+                    if c.ability and c.ability.extra and c.ability.extra.hammer then c:set_debuff(true) end
+                end
             end
         end
     end,
@@ -837,10 +940,11 @@ SMODS.Seal{
                 c:set_cost()
             end
         end
-        
-        for i=1, #G.consumeables.cards do
-            local c = G.consumeables.cards[i]
-            if c.ability and c.ability.extra and c.ability.extra.hammer then c:set_debuff(true) end
+        if G.consumeables then
+            for i=1, #G.consumeables.cards do
+                local c = G.consumeables.cards[i]
+                if c.ability and c.ability.extra and c.ability.extra.hammer then c:set_debuff(true) end
+            end
         end
     end,
     remove_from_deck = function(self, card, from_debuff)
@@ -850,15 +954,32 @@ SMODS.Seal{
                 c:set_cost()
             end
         end
-        
-        for i=1, #G.consumeables.cards do
-            local c = G.consumeables.cards[i]
-            if c.ability and c.ability.extra and c.ability.extra.hammer and not next(pmb_find_joker_with_seal('pmb_jumpman')) then c:set_debuff(nil) end
+        if G.consumeables then
+            for i=1, #G.consumeables.cards do
+                local c = G.consumeables.cards[i]
+                if c.ability and c.ability.extra and c.ability.extra.hammer and not next(pmb_find_joker_with_seal('pmb_jumpman')) then c:set_debuff(nil) end
+            end
         end
     end,
 }
 
--- L EMBLEM TODO
+-- L Emblem
+SMODS.Seal{
+    key = 'lemblem',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 6, y = 3},
+    config = {},
+    badge_colour = HEX('28780b'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        
+    end
+}
 
 -- Last Stand
 SMODS.Seal{
@@ -1043,7 +1164,26 @@ SMODS.Seal{
     end
 }
 
--- NOSTALGIC TUNES TODO
+-- Nostalgic Tunes
+SMODS.Seal{
+    key = 'nostalgictunes',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 4, y = 4},
+    config = {extra = {}},
+    badge_colour = HEX('b50000'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    dependencies = {
+        "PMCS",
+    },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+
+    end
+}
 
 -- P-Down, D-Up
 SMODS.Seal{
@@ -1693,7 +1833,23 @@ SMODS.Seal{
     end
 }
 
--- W EMBLEM TODO
+-- W Emblem
+SMODS.Seal{
+    key = 'wemblem',
+    badge = true,
+    cns_atlas = 'PMAppliers',
+    atlas = 'PMBadges',
+    pos = {x = 3, y = 7},
+    config = {},
+    badge_colour = HEX('e6d702'),
+    sound = { sound = 'gold_seal', per = 1.2, vol = 0.4 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {} }
+    end,
+    calculate = function(self, card, context)
+        
+    end
+}
 
 -- Zap Tap
 SMODS.Seal{

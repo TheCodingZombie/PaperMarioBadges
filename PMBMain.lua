@@ -98,6 +98,25 @@ if not loaded then
 	end
 end
 
+SMODS.Sound({
+    key = 'music_64battle',
+    path = '64battle.ogg',
+    pitch = 1,
+    volume = 0.2,
+    sync = {},
+    select_music_track = function()
+		local has_nostalgic_tunes = false
+		if G.GAME and G.GAME.blind and G.GAME.blind.in_blind then
+			if G.jokers and G.jokers.cards then
+				for i=1, #G.jokers.cards do
+					if G.jokers.cards[i].seal and G.jokers.cards[i].seal == 'pmb_nostalgictunes' then has_nostalgic_tunes = true; break end
+            	end
+			end
+		end
+        return loaded and G.GAME and G.GAME.blind and G.GAME.blind.in_blind and has_nostalgic_tunes
+    end
+})
+
 -- make retriggers exist
 SMODS.current_mod.optional_features = function()
     return {
