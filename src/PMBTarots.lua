@@ -9,7 +9,7 @@ table.sort(a)
 for i,n in ipairs(a) do
     local k = n
     local v = seals[n]
-    if v.badge then -- check if the seal wants to be a badg
+    if v.badge then -- check if the seal wants to be a badge
         local item = {
             key = k.."_applier",
             set = "badge_appliers",
