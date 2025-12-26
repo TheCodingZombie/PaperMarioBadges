@@ -6,12 +6,8 @@ with the ColorSplashed mod, however, certain badges will not be available for us
 ## New Mechanic: Badges!
 - These are modifiers that add all new effects to Jokers! From score increases, to consumable generation, to modifying the Jokers themselves!
 - You can only have one of them per Joker, so pick wisely.
-- There will also be ways to apply them to Jokers in the future, but they only exist in debug right now.
+- Badges can be applied using the new Badge Applier consumable. 
 
 ## Current Feature List
 - 67 unique Badges
 - 67 Badge Appliers 
-
-## TODO
-- Make it easy for people to add custom badges of their own!
-- Allow for people to get the badge appliers.
