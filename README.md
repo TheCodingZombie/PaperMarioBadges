@@ -9,9 +9,9 @@ with the ColorSplashed mod, however, certain badges will not be available for us
 - There will also be ways to apply them to Jokers in the future, but they only exist in debug right now.
 
 ## Current Feature List
-- 52 unique Badges
-- 52 Badge Appliers 
+- 67 unique Badges
+- 67 Badge Appliers 
 
 ## TODO
-- Add the remaining Badges (8 remaining)
 - Make it easy for people to add custom badges of their own!
+- Allow for people to get the badge appliers.
